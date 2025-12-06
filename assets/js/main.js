@@ -115,7 +115,7 @@ const displaySites = () => {
         <td>${index + 1}</td>
         <td>${site.name}</td>
         <td>${site.url}</td>
-        <td class="d-flex gap-4"><a href="./details.html?id=${index}">details</a>
+        <td class="d-flex gap-4 "><a href="./details.html?id=${index}" class="btn btn-outline-primary">details</a>
         <button class="btn btn-outline-success" onclick="updateSite(${index})">update</button>
         <button class="btn btn-outline-danger" onclick=deleteSite(${index})>delete</button></td>
 
@@ -157,7 +157,7 @@ searchInput.addEventListener("input", () => {
         <td>${index + 1}</td>
         <td>${site.name}</td>
         <td>${site.url}</td>
-        <td class="d-flex gap-4"><a href="./details.html?id=${index}">details</a>
+        <td class="d-flex gap-4"><a href="./details.html?id=${index}" class="btn btn-outline-primary">details</a>
         <button class="btn btn-outline-success" onclick="updateSite(${index})">update</button>
         <button class="btn btn-outline-danger" onclick=deleteSite(${index})>delete</button></td>
       </tr>`
