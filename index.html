@@ -16,26 +16,32 @@
 </head>
 
 <body>
+  <h1 class="text-center my-4">Bookmark Manager</h1>
 
-  <form class="bookmark-form">
+  <form class="bookmark-form w-50 m-auto">
+
     <div class="form-floating mb-3">
       <input type="text" class="form-control" placeholder="name@example.com">
       <label for="floatingInput">Site Name</label>
+      <p class="nameError text-danger"></p>
     </div>
 
     <div class="form-floating mb-3">
       <input type="text" class="form-control" placeholder="name@example.com">
       <label for="floatingInput">Site URL</label>
+      <p class="urlError text-danger"></p>
     </div>
 
     <div class="form-floating mb-3">
       <input type="email" class="form-control" placeholder="name@example.com">
       <label for="floatingInput">User Emial</label>
+      <p class="emailError text-danger"></p>
     </div>
 
     <div class="form-floating mb-3">
       <input type="password" class="form-control" placeholder="name@example.com">
       <label for="floatingInput">User Password</label>
+      <p class="passError text-danger"></p>
     </div>
 
 
@@ -43,6 +49,10 @@
       <button class="btn btn-primary" type="submit">Save</button>
     </div>
   </form>
+
+  <input type="text" class="form-control searchInput mb-3 mt-5" placeholder="Search site..." />
+
+  <button class="btn btn-outline-danger deleteAllbtn mb-3">delete all</button>
 
   <table class="table">
   <thead>

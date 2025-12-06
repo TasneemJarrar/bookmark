@@ -5,6 +5,7 @@ const id = params.get("id");
 
 console.log(sites[id]);
 
+//details display
 document.querySelector(".siteName").textContent = sites[id].name;
 document.querySelector(".siteURL").textContent = sites[id].url;
 document.querySelector(".userEmail").textContent = sites[id].email;
