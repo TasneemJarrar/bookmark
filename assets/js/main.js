@@ -4,13 +4,8 @@ const sitesData = document.querySelector(".sitesData");
 const sites = JSON.parse(localStorage.getItem("sites") || "[]");
 let deleteAllbtn = document.querySelector(".deleteAllbtn");
 const searchInput = document.querySelector(".searchInput");
+let updateIndex = null;
 
-//delete all sites
-deleteAllbtn.addEventListener("click", () => {
-  localStorage.removeItem("sites");
-  sites = [];
-  displaySites();
-});
 
 //validation functions
 const validateSiteName = () => {
@@ -84,7 +79,6 @@ inputs[3].addEventListener("input", validateUserPass);
 bookmarkForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const isvlaid = true;
   if (
     !validateSiteName() ||
     !validateSiteURL() ||
@@ -92,7 +86,7 @@ bookmarkForm.addEventListener("submit", (e) => {
     !validateUserPass()
   ) {
     alert("invalid data");
-    isvlaid = false;
+    return;
   }
 
   const site = {
@@ -101,7 +95,14 @@ bookmarkForm.addEventListener("submit", (e) => {
     email: inputs[2].value,
     password: inputs[3].value,
   };
-  sites.push(site);
+
+  if (updateIndex !== null) {
+    sites[updateIndex] = site;
+    updateIndex = null;
+  } else {
+    sites.push(site);
+  }
+
   localStorage.setItem("sites", JSON.stringify(sites));
   displaySites();
 });
@@ -114,7 +115,8 @@ const displaySites = () => {
         <td>${index + 1}</td>
         <td>${site.name}</td>
         <td>${site.url}</td>
-        <td><a href="./details.html?id=${index}">details</a>
+        <td class="d-flex gap-4"><a href="./details.html?id=${index}">details</a>
+        <button class="btn btn-outline-success" onclick="updateSite(${index})">update</button>
         <button class="btn btn-outline-danger" onclick=deleteSite(${index})>delete</button></td>
 
       </tr>`
@@ -130,6 +132,13 @@ const deleteSite = (index) => {
   localStorage.setItem("sites", JSON.stringify(sites));
   displaySites();
 };
+
+//delete all sites
+deleteAllbtn.addEventListener("click", () => {
+  localStorage.removeItem("sites");
+  sites = [];
+  displaySites();
+});
 
 //search sites
 searchInput.addEventListener("input", () => {
@@ -148,9 +157,26 @@ searchInput.addEventListener("input", () => {
         <td>${index + 1}</td>
         <td>${site.name}</td>
         <td>${site.url}</td>
-        <td><a href="./details.html?id=${index}">details</a>
+        <td class="d-flex gap-4"><a href="./details.html?id=${index}">details</a>
+        <button class="btn btn-outline-success" onclick="updateSite(${index})">update</button>
         <button class="btn btn-outline-danger" onclick=deleteSite(${index})>delete</button></td>
       </tr>`
   );
   document.querySelector(".sitesData").innerHTML = result;
 });
+
+//update site
+const updateSite = (index) => {
+  inputs[0].value = sites[index].name;
+  inputs[1].value = sites[index].url;
+  inputs[2].value = sites[index].email;
+  inputs[3].value = sites[index].password;
+  
+  updateIndex = index;
+  
+  validateSiteName();
+  validateSiteURL();
+  validateUserEmail();
+  validateUserPass();
+
+};
