@@ -3,6 +3,7 @@ const bookmarkForm = document.querySelector(".bookmark-form");
 const sitesData = document.querySelector(".sitesData");
 const sites = JSON.parse(localStorage.getItem("sites"));
 
+// add data
 bookmarkForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const site = {
@@ -15,20 +16,20 @@ bookmarkForm.addEventListener("submit", (e) => {
   localStorage.setItem("sites", JSON.stringify(sites));
 });
 
+// display data
 const displaySites = () => {
   const result = sites.map(
-    (site) =>
+    (site, index) =>
       `<tr>
+        <td>${index + 1}</td>
         <td>${site.name}</td>
         <td>${site.url}</td>
-        <td>${site.email}</td>
-        <td>${site.password}</td>
+        <td><a href="./details.html?id=${index}">details</a></td>
       </tr>`
   );
   console.log(result);
 
   document.querySelector(".sitesData").innerHTML = result;
 };
-
 
 displaySites();
